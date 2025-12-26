@@ -13,27 +13,34 @@ export const generateRootMetadata = async (): Promise<Metadata> => {
   const csrfToken = headersStore.get('x-csrf-token') ?? '';
 
   return {
-    title: appConfig.title,
+    title: appConfig.title || 'Bloggerr',
     description: appConfig.description,
     metadataBase: new URL(appConfig.url),
-    applicationName: appConfig.name,
+    applicationName: appConfig.name || 'Bloggerr',
     other: {
       'csrf-token': csrfToken,
     },
     openGraph: {
       url: appConfig.url,
-      siteName: appConfig.name,
-      title: appConfig.title,
+      siteName: appConfig.name || 'Bloggerr',
+      title: appConfig.title || 'Bloggerr',
       description: appConfig.description,
     },
     twitter: {
       card: 'summary_large_image',
-      title: appConfig.title,
+      title: appConfig.title || 'Bloggerr',
       description: appConfig.description,
     },
     icons: {
-      icon: '/images/favicon/favicon.ico',
-      apple: '/images/favicon/apple-touch-icon.png',
+      icon: [
+        { url: '/images/favicon/favicon.png', type: 'image/png', sizes: 'any' },
+        { url: '/images/favicon/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+        { url: '/images/favicon/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      ],
+      apple: [
+        { url: '/images/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+      shortcut: '/images/favicon/favicon.png',
     },
   };
 };

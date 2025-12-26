@@ -6,7 +6,7 @@ const AppConfigSchema = z
   .object({
     name: z
       .string({
-        description: `This is the name of your SaaS. Ex. "Makerkit"`,
+        description: `This is the name of your SaaS. Ex. "Bloggerr"`,
         required_error: `Please provide the variable NEXT_PUBLIC_PRODUCT_NAME`,
       })
       .min(1),
@@ -41,11 +41,14 @@ const AppConfigSchema = z
   .refine(
     (schema) => {
       const isCI = process.env.NEXT_PUBLIC_CI;
+      const isLocalhost = schema.url.includes('localhost') || schema.url.includes('127.0.0.1');
 
-      if (isCI ?? !schema.production) {
+      // Allow HTTP for localhost or if not in production
+      if (isLocalhost || (isCI ?? !schema.production)) {
         return true;
       }
 
+      // In production (non-localhost), require HTTPS
       return !schema.url.startsWith('http:');
     },
     {

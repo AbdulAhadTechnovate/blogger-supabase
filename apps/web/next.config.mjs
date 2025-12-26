@@ -22,6 +22,8 @@ const config = {
   reactStrictMode: true,
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: INTERNAL_PACKAGES,
+  /** Fix workspace root detection warning */
+  outputFileTracingRoot: path.resolve(__dirname, '../..'),
   images: {
     remotePatterns: getRemotePatterns(),
   },
@@ -54,9 +56,6 @@ const config = {
   experimental: {
     mdxRs: true,
     reactCompiler: ENABLE_REACT_COMPILER,
-    turbo: {
-      resolveExtensions: ['.ts', '.tsx', '.js', '.jsx'],
-    },
     optimizePackageImports: [
       'recharts',
       'lucide-react',
@@ -67,6 +66,9 @@ const config = {
       'date-fns',
       ...INTERNAL_PACKAGES,
     ],
+  },
+  turbopack: {
+    resolveExtensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   modularizeImports: {
     lodash: {

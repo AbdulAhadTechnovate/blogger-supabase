@@ -1,343 +1,399 @@
-![Makerkit - Next.js Supabase SaaS Starter Kit \[Lite version\]](apps/web/public/images/makerkit.webp)
+# Bloggerr
 
-# NEW! Next.js Supabase SaaS Starter Kit (Lite)
+A fully functional blog website built with Next.js, Makerkit, and Supabase, featuring authentication, blog post management, and GraphQL integration.
 
-Start building your SaaS faster with our Next.js 15 + Supabase starter kit.
+## 📋 Features
 
-👉 **Looking for a full-featured SaaS Starter Kit?** [Check out the complete version](https://makerkit.dev)
+### Core Features
 
-⭐️ **Why Developers Trust Makerkit:**
-- Production-grade architecture decisions
-- Comprehensive TypeScript setup
-- Modern stack: Next.js 15, Supabase, TailwindCSS v4
-- Quality Code tooling: ESLint v9, Prettier, strict TypeScript, etc.
-- Regular updates and active maintenance
+- **Homepage**: Paginated list (5 per page) with title, excerpt (200 chars), published date, and author name
+- **Post Details Page**: Full blog post view with title, body, author, and published date
+- **Create Post Page**: Authenticated users can create posts with title and body (author auto-filled)
+- **GraphQL Integration**: All queries and mutations use Supabase GraphQL API
+- **Authentication**: Email/password, Google OAuth, and Email OTP (passwordless)
+- **Access Control**: Protected routes for creating posts
 
-PS: the documentation for this kit is still being updated, so please check back later for more details.
+### Additional Features
 
-## What's Included
+1. **ISR (Incremental Static Regeneration)**: Implemented with `revalidate = 60` and `generateStaticParams` for optimal performance
+2. **Form Validation**: Zod + React Hook Form with real-time validation
+3. **Email OTP Login**: Passwordless authentication via Supabase
+4. **Optimistic UI Updates**: Immediate UI updates after post creation
+5. **Profile Dropdown**: User profile with logout and settings in sidebar
 
-### Core Architecture
-- 🏗️ Next.js 15 + Turborepo monorepo setup
-- 🎨 Shadcn UI components with TailwindCSS v4
-- 🔐 Supabase authentication & basic DB
-- 🌐 i18n translations (client + server)
-- ✨ Full TypeScript + ESLint v9 + Prettier configuration
+## 🚀 Quick Start
 
-### Key Features
-- 👤 User authentication flow
-- ⚙️ User profile & settings
-- 📱 Responsive marketing pages
-- 🔒 Protected routes
-- 🎯 Basic test setup with Playwright
+Follow these detailed steps to get the development server running on your local machine.
 
-### Technologies
+### Step 1: Check Prerequisites
 
-This starter kit provides core foundations:
+Before starting, ensure you have the following installed:
 
-🛠️ **Technology Stack**:
-- [Next.js 15](https://nextjs.org/): A React-based framework for server-side rendering and static site generation.
-- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.
-- [Supabase](https://supabase.com/): A realtime database for web and mobile applications.
-- [i18next](https://www.i18next.com/): A popular internationalization framework for JavaScript.
-- [Turborepo](https://turborepo.org/): A monorepo tool for managing multiple packages and applications.
-- [Shadcn UI](https://shadcn.com/): A collection of components built using Tailwind CSS.
-- [Zod](https://github.com/colinhacks/zod): A TypeScript-first schema validation library.
-- [React Query](https://tanstack.com/query/v4): A powerful data fetching and caching library for React.
-- [Prettier](https://prettier.io/): An opinionated code formatter for JavaScript, TypeScript, and CSS.
-- [Eslint](https://eslint.org/): A powerful linting tool for JavaScript and TypeScript.
-- [Playwright](https://playwright.dev/): A framework for end-to-end testing of web applications.
+- **Node.js 18.x or later**
+  - Check your version: `node --version`
+  - Download from [nodejs.org](https://nodejs.org/) if needed
 
-This kit is a trimmed down version of the [full version of this SaaS Starter Kit](https://makerkit.dev). It is a good way to evaluate small part of the full kit, or to simply use it as a base for your own project.
+- **PNPM** (Package Manager)
+  - Check if installed: `pnpm --version`
+  - Install if missing: `npm install -g pnpm`
 
-## Comparing Lite vs Full Version
+- **Git** (for cloning the repository)
+  - Check if installed: `git --version`
 
-The lite kit is perfect for:
-- Evaluating our code architecture and patterns
-- Building basic SaaS prototypes
-- Learning our tech stack approach
-- Building a basic SaaS tool
+- **Supabase Account** (for database and authentication)
+  - Sign up at [supabase.com](https://supabase.com) (free tier available)
 
-The [full version](https://makerkit.dev) adds production features:
-- 💳 Complete billing and subscription system
-- 👥 Team accounts and management
-- 📧 Mailers and Email Templates (Nodemailer, Resend, etc.)
-- 📊 Analytics (GA, Posthog, Umami, etc.)
-- 🔦 Monitoring providers (Sentry, Baselime, etc.)
-- 🔐 Production database schema
-- ✅ Comprehensive test suite
-- 🔔 Realtime Notifications
-- 📝 Blogging system
-- 💡 Documentation system
-- ‍💻 Super Admin panel
-- 🕒 Daily updates and improvements
-- 🐛 Priority bug fixes
-- 🤝 Support
-- ⭐️ Used by 1000+ developers
-- 💪 Active community members
-- 🏢 Powers startups to enterprises
+### Step 2: Clone the Repository
 
-[View complete feature comparison →](https://makerkit.dev/#pricing)
+1. Open your terminal/command prompt
+2. Navigate to your desired directory
+3. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   ```
+4. Navigate into the project directory:
+   ```bash
+   cd blog-supabase
+   ```
+   (or `cd bloggerr` if that's your folder name)
 
-## Getting Started
+### Step 3: Install Dependencies
 
-### Prerequisites
+1. From the project root directory, run:
+   ```bash
+   pnpm install
+   ```
+2. Wait for all packages to install (this may take a few minutes)
+3. You should see a success message when installation completes
 
-- Node.js 18.x or later (preferably the latest LTS version)
-- Docker
-- PNPM
+### Step 4: Set Up Supabase Project
 
-Please make sure you have a Docker daemon running on your machine. This is required for the Supabase CLI to work.
+Before starting the dev server, you need to configure Supabase:
 
-### Installation
+1. **Create a Supabase project**:
+   - Go to [supabase.com](https://supabase.com)
+   - Click "New Project"
+   - Fill in project details and wait for it to be ready
 
-#### 1. Clone this repository
+2. **Get your Supabase credentials**:
+   - In Supabase Dashboard, go to **Settings** → **API**
+   - Copy the following values:
+     - **Project URL** (looks like: `https://xxxxx.supabase.co`)
+     - **anon public** key (long string starting with `eyJ...`)
+     - **service_role** key (long string starting with `eyJ...`)
+
+3. **Apply database migrations**:
+   - Go to **SQL Editor** in Supabase Dashboard
+   - Run these migration files in order (copy and paste each file's content):
+     - `apps/web/supabase/migrations/20241219010757_schema.sql`
+     - `apps/web/supabase/migrations/20251225224935_create_blog_posts.sql`
+     - `apps/web/supabase/migrations/20251226002001_create_accounts_table_simplified.sql` (if accounts table doesn't exist)
+     - `apps/web/supabase/migrations/20251226002000_add_public_account_read_policy.sql`
+   - Click "Run" after each migration
+
+### Step 5: Configure Environment Variables
+
+1. Navigate to the `apps/web/` directory:
+   ```bash
+   cd apps/web
+   ```
+
+2. Create a new file named `.env.local`:
+   ```bash
+   # On Windows (PowerShell)
+   New-Item -Path .env.local -ItemType File
+   
+   # On Mac/Linux
+   touch .env.local
+   ```
+
+3. Open `.env.local` in a text editor and add the following:
+   ```env
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   ```
+
+4. Replace the placeholder values:
+   - `your_supabase_url` → Your Project URL from Step 4
+   - `your_supabase_anon_key` → Your anon public key from Step 4
+   - `your_supabase_service_role_key` → Your service_role key from Step 4
+
+5. Save the file
+
+### Step 6: Start the Development Server
+
+1. **From the project root directory** (not `apps/web`), run:
+   ```bash
+   pnpm run dev
+   ```
+
+2. **Wait for the server to start**. You should see output like:
+   ```
+   ▲ Next.js 15.x.x
+   - Local:        http://localhost:3000
+   - Ready in X seconds
+   ```
+
+3. **Open your browser** and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+4. **Verify it's working**:
+   - You should see the blog homepage
+   - The page should load without errors
+   - If you see a connection error, check your `.env.local` file values
+
+### Step 7: Verify Everything Works
+
+1. **Test the homepage**: Navigate to `http://localhost:3000/home`
+   - You should see the blog posts list (may be empty if no posts exist)
+
+2. **Test authentication**: Navigate to `http://localhost:3000/auth/sign-in`
+   - You should see the sign-in page
+   - Try creating an account with email/password
+
+3. **Check the terminal**: 
+   - No error messages should appear
+   - If you see errors, check the Troubleshooting section below
+
+### Troubleshooting Common Issues
+
+**Port 3000 already in use:**
+- Stop any other applications using port 3000
+- Or change the port: `pnpm run dev -- -p 3001`
+
+**Environment variables not loading:**
+- Ensure `.env.local` is in `apps/web/` directory
+- Restart the dev server after changing environment variables
+- Check for typos in variable names (they must match exactly)
+
+**Supabase connection errors:**
+- Verify your Supabase URL and keys are correct
+- Check that your Supabase project is active
+- Ensure migrations have been applied successfully
+
+**Dependencies installation fails:**
+- Try deleting `node_modules` and `pnpm-lock.yaml`
+- Run `pnpm install` again
+- Check your Node.js version: `node --version` (should be 18+)
+
+---
+
+**Next Steps**: Once the dev server is running, see the sections below for:
+- Authentication configuration (Google OAuth, Email OTP)
+- Database schema details
+- Project structure overview
+
+## 🔗 Linking to Supabase Project
+
+### Option 1: Using Supabase Web UI (Recommended)
+
+1. **Create a Supabase project** at [supabase.com](https://supabase.com)
+
+2. **Apply database migrations**:
+   - Go to Supabase Dashboard → SQL Editor
+   - Run the migration files in order:
+     - `apps/web/supabase/migrations/20241219010757_schema.sql`
+     - `apps/web/supabase/migrations/20251225224935_create_blog_posts.sql`
+     - `apps/web/supabase/migrations/20251226002001_create_accounts_table_simplified.sql` (if accounts table doesn't exist)
+     - `apps/web/supabase/migrations/20251226002000_add_public_account_read_policy.sql`
+
+3. **Enable GraphQL**:
+   - Go to Supabase Dashboard → API → GraphQL
+   - GraphQL is automatically enabled for Supabase projects
+
+4. **Get your credentials**:
+   - Go to Supabase Dashboard → Settings → API
+   - Copy `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`
+   - Copy `anon public` key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - Copy `service_role` key → `SUPABASE_SERVICE_ROLE_KEY`
+
+5. **Configure Google OAuth** (optional):
+   - Go to Supabase Dashboard → Authentication → Providers
+   - Enable Google provider
+   - Add your Google OAuth credentials
+
+### Option 2: Using Supabase CLI
 
 ```bash
-git clone https://github.com/makerkit/next-supabase-saas-kit-lite.git
-```
-
-#### 2. Install dependencies
-
-```bash
-pnpm install
-```
-
-#### 3. Start Supabase
-
-Please make sure you have a Docker daemon running on your machine.
-
-Then run the following command to start Supabase:
-
-```bash
-pnpm run supabase:web:start
-```
-
-Once the Supabase server is running, please access the Supabase Dashboard using the port in the output of the previous command. Normally, you find it at [http://localhost:54323](http://localhost:54323).
-
-You will also find all the Supabase services printed in the terminal after the command is executed.
-
-##### Stopping Supabase
-
-To stop the Supabase server, run the following command:
-
-```bash
-pnpm run supabase:web:stop
-```
-
-##### Resetting Supabase
-
-To reset the Supabase server, run the following command:
-
-```bash
-pnpm run supabase:web:reset
-```
-
-##### More Supabase Commands
-
-For more Supabase commands, see the [Supabase CLI documentation](https://supabase.com/docs/guides/cli).
-
-```
-# Create new migration
-pnpm --filter web supabase migration new <name>
-
-# Link to Supabase project
-pnpm --filter web supabase link
+# Link to your Supabase project
+cd apps/web
+pnpm supabase link --project-ref your-project-ref
 
 # Push migrations
-pnpm --filter web supabase db push
+pnpm supabase db push
 ```
 
-#### 4. Start the Next.js application
+## 🔐 Authentication Configuration
 
-```bash
-pnpm run dev
+### Email/Password Authentication
+
+Enabled by default in Makerkit. No additional configuration needed.
+
+### Google OAuth
+
+1. **Get Google OAuth credentials**:
+   - Go to [Google Cloud Console](https://console.cloud.google.com)
+   - Create OAuth 2.0 credentials
+   - Add authorized redirect URI: `https://your-project.supabase.co/auth/v1/callback`
+
+2. **Configure in Supabase**:
+   - Go to Supabase Dashboard → Authentication → Providers
+   - Enable Google provider
+   - Add Client ID and Client Secret
+
+### Email OTP (Passwordless)
+
+1. **Enable in environment variables**:
+   ```env
+   NEXT_PUBLIC_AUTH_EMAIL_OTP=true
+   ```
+
+2. **Configure email template in Supabase**:
+   - Go to Supabase Dashboard → Authentication → Email Templates
+   - Customize the Magic Link template to show OTP code: `{{ .Token }}`
+
+3. **Test the flow**:
+   - Navigate to `/auth/sign-in`
+   - Enter email and click "Send Code"
+   - Enter 6-digit code from email
+
+## 📁 Project Structure
+
 ```
+apps/web/
+├── app/
+│   ├── (marketing)/          # Public marketing pages
+│   │   ├── blog/[id]/        # Blog post detail pages
+│   │   └── _components/      # Blog components
+│   ├── home/                 # Protected app pages
+│   │   ├── page.tsx          # Blog homepage (with sidebar)
+│   │   └── blog/
+│   │       ├── [id]/         # Blog detail pages
+│   │       └── create/       # Create post page (protected)
+│   └── auth/                 # Authentication pages
+├── lib/
+│   └── graphql/              # GraphQL client, queries, mutations, hooks
+├── supabase/
+│   └── migrations/           # Database migrations
+└── config/                    # App configuration
 
-The application will be available at http://localhost:3000.
-
-#### 5. Code Health (linting, formatting, etc.)
-
-To format your code, run the following command:
-
-```bash
-pnpm run format:fix
-```
-
-To lint your code, run the following command:
-
-```bash
-pnpm run lint
-```
-
-To validate your TypeScript code, run the following command:
-
-```bash
-pnpm run typecheck
-```
-
-Turborepo will cache the results of these commands, so you can run them as many times as you want without any performance impact.
-
-## Project Structure
-
-The project is organized into the following folders:
-
-```
-apps/
-├── web/                  # Next.js application
-│   ├── app/             # App Router pages
-│   │   ├── (marketing)/ # Public marketing pages
-│   │   ├── auth/        # Authentication pages
-│   │   └── home/        # Protected app pages
-│   ├── supabase/        # Database & migrations
-│   └── config/          # App configuration
-│
 packages/
-├── ui/                  # Shared UI components
-└── features/           # Core feature packages
-    ├── auth/           # Authentication logic
-    └── ...
+├── ui/                        # Shared UI components
+└── features/                  # Feature packages
 ```
 
-For more information about this project structure, see the article [Next.js App Router: Project Structure](https://makerkit.dev/blog/tutorials/nextjs-app-router-project-structure).
+## 🎯 Key Features Explained
 
-### Environment Variables
+### GraphQL Integration
 
-You can configure the application by setting environment variables in the `.env.local` file.
+All blog operations use Supabase's GraphQL API:
 
-Here are the available variables:
+- **Queries**: `GET_BLOG_POSTS`, `GET_BLOG_POST_BY_ID`
+- **Mutations**: `CREATE_BLOG_POST`, `UPDATE_BLOG_POST`, `DELETE_BLOG_POST`
+- **Client**: Custom GraphQL client in `apps/web/lib/graphql/client.ts`
+- **Hooks**: React Query hooks for client-side data fetching
 
-| Variable Name | Description | Default Value |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | The URL of your SaaS application | `http://localhost:3000` |
-| `NEXT_PUBLIC_PRODUCT_NAME` | The name of your SaaS product | `Makerkit` |
-| `NEXT_PUBLIC_SITE_TITLE` | The title of your SaaS product | `Makerkit - The easiest way to build and manage your SaaS` |
-| `NEXT_PUBLIC_SITE_DESCRIPTION` | The description of your SaaS product | `Makerkit is the easiest way to build and manage your SaaS. It provides you with the tools you need to build your SaaS, without the hassle of building it from scratch.` |
-| `NEXT_PUBLIC_DEFAULT_THEME_MODE` | The default theme mode of your SaaS product | `light` |
-| `NEXT_PUBLIC_THEME_COLOR` | The default theme color of your SaaS product | `#ffffff` |
-| `NEXT_PUBLIC_THEME_COLOR_DARK` | The default theme color of your SaaS product in dark mode | `#0a0a0a` |
-| `NEXT_PUBLIC_SUPABASE_URL` | The URL of your Supabase project | `http://127.0.0.1:54321` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | The anon key of your Supabase project | ''
-| `SUPABASE_SERVICE_ROLE_KEY` | The service role key of your Supabase project | ''
+### Pagination
 
-## Architecture
+- Server-side pagination with 5 posts per page
+- URL-based pagination (`/home?page=2`)
+- Previous/Next navigation buttons
+- ISR revalidation every 60 seconds
 
-This starter kit uses a monorepo architecture.
+### ISR (Incremental Static Regeneration)
 
-1. The `apps/web` directory is the Next.js application.
-2. The `packages` directory contains all the packages used by the application.
-3. The `packages/features` directory contains all the features of the application.
-4. The `packages/ui` directory contains all the UI components.
+- **Homepage**: `revalidate = 60` - regenerates every 60 seconds
+- **Post Details**: `revalidate = 60` + `generateStaticParams` for first 10 posts
+- **Benefits**: Fast page loads with fresh content
 
-For more information about the architecture, please refer to the [Makerkit blog post about Next.js Project Structure](https://makerkit.dev/blog/tutorials/nextjs-app-router-project-structure).
+### Form Validation
 
-### Marketing Pages
+- **Zod Schema**: Validates title (1-255 chars) and body (10-10,000 chars)
+- **React Hook Form**: Real-time validation with `mode: 'onChange'`
+- **Character Counters**: Visual feedback for field limits
+- **Error Messages**: Clear, inline error messages
 
-Marketing pages are located in the `apps/web/app/(marketing)` directory. These pages are used to showcase the features of the SaaS and provide information about the product.
+### Optimistic UI Updates
 
-### Authentication
+- Posts appear immediately in the list after creation
+- React Query optimistic updates in `useCreateBlogPost` hook
+- Smooth user experience with instant feedback
 
-Authenticated is backed by Supabase. The `apps/web/app/auth` directory contains the authentication pages, however, the logic is into its own package `@kit/auth` located in `packages/features/auth`.
+### Access Control
 
-This package can be used across multiple applications.
+- **Public Routes**: `/home`, `/home/blog/[id]` - accessible without authentication
+- **Protected Routes**: `/home/blog/create`, `/home/settings` - require authentication
+- **Middleware**: Handles route protection at the edge
+- **RLS Policies**: Database-level security via Supabase Row Level Security
 
-### Gated Pages
+## 🧪 Testing
 
-Gated pages are located in the `apps/web/app/home` directory. Here is where you can build your SaaS pages that are gated by authentication.
+Quick test checklist:
+- [ ] Sign up with email/password
+- [ ] Sign in with Google OAuth
+- [ ] Sign in with Email OTP
+- [ ] View blog posts on homepage
+- [ ] Navigate pagination
+- [ ] View post details
+- [ ] Create a new post (authenticated)
+- [ ] Verify form validation
+- [ ] Test as unauthenticated user (can view, cannot create)
 
-### Database
+## 📝 Database Schema
 
-The Supabase database is located in the `apps/web/supabase` directory. In this directory you will find the database schema, migrations, and seed data.
+### `blog_posts` Table
 
-#### Creating a new migration
-To create a new migration, run the following command:
-
-```bash
-pnpm --filter web supabase migration new --name <migration-name>
+```sql
+- id (UUID, primary key)
+- title (VARCHAR 255)
+- body (TEXT)
+- author_id (UUID, references auth.users)
+- published_at (TIMESTAMP)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
 ```
 
-This command will create a new migration file in the `apps/web/supabase/migrations` directory. 
+### RLS Policies
 
-#### Applying a migration
+- **Public Read**: Anyone can read published posts (`published_at IS NOT NULL`)
+- **Authenticated Create**: Authenticated users can create posts
+- **Author Update/Delete**: Users can only modify their own posts
 
-Once you have created a migration, you can apply it to the database by running the following command:
+## 🐛 Troubleshooting
 
-```bash
-pnpm run supabase:web:reset
-```
+### Posts not appearing
 
-This command will apply the migration to the database and update the schema. It will also reset the database using the provided seed data.
+- Verify `published_at` is set (not null)
+- Check RLS policies are enabled
+- Verify GraphQL is enabled in Supabase
 
-#### Linking the Supabase database
+### Cannot create post
 
-Linking the local Supabase database to the Supabase project is done by running the following command:
+- Ensure you're logged in
+- Check RLS policies allow authenticated insert
+- Verify form validation passes
 
-```bash
-pnpm --filter web supabase db link
-```
+### Author names not showing
 
-This command will link the local Supabase database to the Supabase project.
+- Ensure `accounts` table exists and has records
+- Verify RLS policy `accounts_read_public_for_blog` is applied
+- Check that `author_id` matches user IDs in `accounts` table
 
-#### Pushing the migration to the Supabase project
+### GraphQL errors
 
-After you have made changes to the migration, you can push the migration to the Supabase project by running the following command:
+- Verify GraphQL is enabled in Supabase Dashboard
+- Check environment variables are set correctly
+- Test queries directly in Supabase GraphQL explorer
 
-```bash
-pnpm --filter web supabase db push
-```
+## 📧 Contact
 
-This command will push the migration to the Supabase project. You can now apply the migration to the Supabase database.
+GitHub: [ahsang](https://github.com/ahsang)
 
-## Going to Production
+---
 
-#### 1. Create a Supabase project
+**Built with**: Next.js 15, Makerkit, Supabase, TypeScript, GraphQL, React Query, Zod, React Hook Form
 
-To deploy your application to production, you will need to create a Supabase project.
-
-#### 2. Push the migration to the Supabase project
-
-After you have made changes to the migration, you can push the migration to the Supabase project by running the following command:
-
-```bash
-pnpm --filter web supabase db push
-```
-
-This command will push the migration to the Supabase project.
-
-#### 3. Set the Supabase Callback URL
-
-When working with a remote Supabase project, you will need to set the Supabase Callback URL.
-
-Please set the callback URL in the Supabase project settings to the following URL:
-
-`<url>/auth/callback`
-
-Where `<url>` is the URL of your application.
-
-#### 4. Deploy to Vercel or any other hosting provider
-
-You can deploy your application to any hosting provider that supports Next.js.
-
-#### 5. Deploy to Cloudflare
-
-The configuration should work as is, but you need to set the runtime to `edge` in the root layout file (`apps/web/app/layout.tsx`).
-
-```tsx
-export const runtime = 'edge';
-```
-
-Remember to enable Node.js compatibility in the Cloudflare dashboard.
-
-## Contributing
-
-Contributions for bug fixed are welcome! However, please open an issue first to discuss your ideas before making a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Support
-
-No support is provided for this kit. Feel free to open an issue if you have any questions or need help, but there is no guaranteed response time, nor guarantee a fix.
-
-For dedicated support, priority fixes, and advanced features, [check out our full version](https://makerkit.dev).
